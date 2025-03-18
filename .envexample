@@ -1,0 +1,4 @@
+BOT_TOKEN=bottoken
+DSN=postgresql+psycopg://superuser:superpassword@127.0.0.1/data
+DSN_IS_ECHO=True
+NATS_SERVERS=nats://localhost:4222
