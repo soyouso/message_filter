@@ -17,5 +17,5 @@ class DbEngineMiddleware(BaseMiddleware):
             data: Dict[str, Any],
     ) -> Any:
         async with self.engine.connect() as conn:
-            data['engine'] = conn
+            data['connection'] = conn
             return await handler(event, data)

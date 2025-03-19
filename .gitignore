@@ -6,6 +6,8 @@ venv/
 /nats/data/
 .DS_Store
 __pycache__/
+*.py[cod]
+*$py.class
+__pypackages__/
 
-nui/
 .idea/
