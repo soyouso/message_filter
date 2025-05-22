@@ -2,11 +2,11 @@ from aiogram_dialog.widgets.text import Const, Format
 from aiogram_dialog.widgets.input import TextInput, MessageInput, ManagedTextInput
 from aiogram_dialog.widgets.kbd import Button, Select, SwitchTo, Url, Column, Radio, ScrollingGroup
 from aiogram_dialog import Dialog, DialogManager, StartMode, Window
-from .states import FirstDialogSG
+from bot.dialogs.start.states import FirstDialogSG
 from aiogram.enums import ContentType
-from .getters import (getter_for_fifth, get_chats, get_i18n, get_words_ban_list, get_languages, getter_str_chat,
+from bot.dialogs.start.getters import (getter_for_fifth, get_chats, get_i18n, get_words_ban_list, get_languages, getter_str_chat,
                       get_users_ban_list)
-from .handlers import (correct_text, check_correct_word, chat_choice, choose_punish, error_time_text, no_text, ban_word_choice, \
+from bot.dialogs.start.handlers import (correct_text, check_correct_word, chat_choice, choose_punish, error_time_text, no_text, ban_word_choice, \
     final_confirm, choose_user_ban_time, check_correct_ban_time, correct_ban_time_input, radio_lang_state_changed, error_words_text,
                        unban_user)
 

@@ -1,39 +1,18 @@
-version: "3.8"
 services:
-  services:
-    bot:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      command: ["python", "-m", "bot"]
-
-  postgres:
-    image: postgres:15-alpine
-    restart: "no"
-    ports:
-      - "127.0.0.1:5432:5432"
-    environment:
-      POSTGRES_USER: superuser
-      POSTGRES_PASSWORD: superpassword
-      POSTGRES_DB: data
-    volumes:
-      - "01-simple-alchemy-postgres:/var/lib/postgresql/data"
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    restart: "no"
-    ports:
-      - "127.0.0.1:8080:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: soyou@a.com
-      PGADMIN_DEFAULT_PASSWORD: 24081999soyou
-    volumes:
-      - "01-simple-alchemy-pgadmin:/var/lib/pgadmin"
-    depends_on:
-      - postgres
+  #app:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #  restart: unless-stopped
+  #  env_file: ".env"
+  #  command: ["python", "-m", "bot"]
+  #  depends_on:
+  #    - nats
+  #    - postgres
 
   nats:
-    image: nats:latest
+    image: nats:2.10.22
+    restart: unless-stopped
     entrypoint: /nats-server
     command: "-c /config/server.conf"
     ports:
@@ -48,11 +27,37 @@ services:
     container_name: nats-nui
     ports:
       - "31311:31311"
+    env_file:
+      - '.env'
     volumes:
       - ./nui/db:/db
     depends_on:
       - nats
 
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=superpassword
+      - POSTGRES_USER=superuser
+      - POSTGRES_DB=data
+
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    env_file:
+      - '.env'
+    volumes:
+      - "pgadmin:/var/lib/pgadmin"
+    depends_on:
+      - postgres
 volumes:
-  01-simple-alchemy-pgadmin:
-  01-simple-alchemy-postgres:
+  pgadmin:
+  postgres:

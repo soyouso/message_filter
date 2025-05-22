@@ -3,15 +3,15 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from bot.db import metadata
-from handlers import commands_router, others_router
+from bot.handlers import commands_router, others_router
 from bot.middlewares import TranslatorRunnerMiddleware, DbEngineMiddleware, TrackAllUsersMiddleware
-from config_data import load_config, Config
+from bot.config_data import load_config, Config
 from bot.dialogs import first_dialog
 from aiogram_dialog import setup_dialogs
 from sqlalchemy.ext.asyncio import create_async_engine
-from utils import create_translator_hub
-from storage.nats_storage import NatsStorage
-from utils.nats_connect import connect_to_nats
+from bot.utils import create_translator_hub
+from bot.storage.nats_storage import NatsStorage
+from bot.utils.nats_connect import connect_to_nats
 from fluentogram import TranslatorHub
 
 logging.basicConfig(

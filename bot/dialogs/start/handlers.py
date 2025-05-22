@@ -7,7 +7,7 @@ from aiogram_dialog import ShowMode
 from fluentogram import TranslatorHub, TranslatorRunner
 from sqlalchemy import update
 
-from .states import FirstDialogSG
+from bot.dialogs.start.states import FirstDialogSG
 from sqlalchemy import select, delete
 from sqlalchemy.dialects.postgresql import insert
 from bot.db import words, users, chats, banned
